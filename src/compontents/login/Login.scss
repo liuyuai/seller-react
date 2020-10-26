@@ -1,0 +1,31 @@
+.bg {
+  height: 100vh;
+  position: relative;
+  background: url("../../assets/login.jpg") no-repeat center center;
+  background-size: cover;
+  .login-box {
+    position: absolute;
+    border-radius: 4px;
+    top: 50%;
+    right: 200px;
+    width: 350px;
+    padding: 0 40px 40px;
+    background-color: #fff;
+    transform: translateY(-60%);
+    .title {
+      padding: 15px 0;
+    }
+    .line {
+      padding: 5px;
+    }
+    .login-form-button{
+      width: 100%;
+    }
+  }
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}

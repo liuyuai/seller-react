@@ -1,13 +1,19 @@
 import './App.css';
-import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Main from './compontents/Main'
+import Login from './compontents/login/Login'
+import React from "react";
+
 
 function App() {
   return (
       // <Main></Main>
       <Router>
-        <Route path="/" component={Main} />
-        <Route exact path="/" render={() => <Redirect to="/home" push />} />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route exact path="/" render={() => <Redirect to="/home" push />} />
+          <Route path="/" component={Main} />
+        </Switch>
       </Router>
   )
 }

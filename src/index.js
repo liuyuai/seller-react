@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css';
 import './index.css';
 
+
+// 由于使用了antdUI  导致StrictMode 模式会有错误
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
