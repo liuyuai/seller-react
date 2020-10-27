@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from "antd";
 import {NavLink} from "react-router-dom";
 
-import { menu as menuList } from '../../routes/config'
+import menuList from '../../routes/menus'
 
 const { SubMenu } = Menu;
 

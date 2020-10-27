@@ -1,18 +1,22 @@
 import './App.css';
-import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Main from './compontents/Main'
 import Login from './compontents/login/Login'
+import NotFound from './compontents/NoFund'
 import React from "react";
 
 
+//使用严格匹配看看能不能解决 乱输入url是  还渲染main主题
+
 function App() {
   return (
-      // <Main></Main>
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
           <Route exact path="/" render={() => <Redirect to="/home" push />} />
-          <Route path="/" component={Main} />
+          <Route path="/404" component={NotFound} />
+          <Route exact path="/" component={Main} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
   )

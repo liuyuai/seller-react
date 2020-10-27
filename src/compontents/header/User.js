@@ -1,4 +1,4 @@
-import './User.css'
+import './User.scss'
 import React from 'react';
 import {Avatar,Menu,Dropdown } from "antd";
 import { UserOutlined } from '@ant-design/icons';
@@ -23,7 +23,7 @@ const menu = (
 
 export default function User() {
   return (
-      <div className="text-right margin48">
+      <div className="user-box">
         <Dropdown overlay={menu}>
           <div>
             <Avatar icon={<UserOutlined />} />

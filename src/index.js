@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css';
 import './index.css';
+import {ConfigProvider } from 'antd'  //antd 全局化配置 可以定义配置所有组件一些样式 具体看api
 
 
 // 由于使用了antdUI  导致StrictMode 模式会有错误
 ReactDOM.render(
   <React.Fragment>
+    <ConfigProvider>
     <App />
+    </ConfigProvider>
   </React.Fragment>,
   document.getElementById('root')
 );

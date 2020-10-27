@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
-import Home from '../compontents/Home'
-import About from "../compontents/About";
-import {menu as mentList} from "./config";
+import { Switch,Route } from "react-router-dom";
+import menuList from "./menus";
+
+
+
 
 
 function CreateRoute(route) {
@@ -16,8 +17,6 @@ function CreateRoute(route) {
     />
   )
 }
-
-
 
 function RouteWithSubRoutes(route) {
   return (
@@ -34,7 +33,7 @@ function RouteWithSubRoutes(route) {
 export default function Routes() {
   return (
       <Switch>
-        {mentList.map(item =><RouteWithSubRoutes key={item.id} {...item} /> )}
+        {menuList.map(item =><RouteWithSubRoutes key={item.id} {...item} /> )}
       </Switch>
   )
 }
