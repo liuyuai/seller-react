@@ -8,18 +8,45 @@ import React from "react";
 
 //使用严格匹配看看能不能解决 乱输入url是  还渲染main主题
 
+
+const fakeAuth = {
+  isAuthenticated: true
+};
+
 function App() {
   return (
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route exact path="/" render={() => <Redirect to="/home" push />} />
           <Route path="/404" component={NotFound} />
-          <Route exact path="/" component={Main} />
+          <PrivateRoute>
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/" component={Main} />
+          </PrivateRoute>
           <Route component={NotFound} />
         </Switch>
       </Router>
   )
+}
+
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        fakeAuth.isAuthenticated ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
 }
 
 export default App;
