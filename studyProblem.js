@@ -23,8 +23,19 @@
 
 
 
+
 /*
 *
 * react-redux
+*
+*
+* axios 中  withCredentials 这个属性 是设置跨域是否允许使用 cookie 这类数据的
+*
+* 因为现在大多数的后台 也是分模块化的  example  tg have base  coupon item order and so on。
+* 在访问这些接口的时候  有权限问题 也就是token  那么一定要设置 跨域也能使用token 才能正常访问这些数据
+*
+*
+* 在目录结构上 可以放在 components 上
+*
 *
 * **/

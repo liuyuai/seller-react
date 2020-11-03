@@ -1,5 +1,5 @@
-import List from "../../compontents/content/order/List";
-import Cancel from "../../compontents/content/order/Cancel";
+import List from "../../components/content/order/List";
+import Cancel from "../../components/content/order/Cancel";
 
 export const order=  [{
   path:"/order",title:'订单',id:2,

@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import Main from './compontents/Main'
-import Login from './compontents/login/Login'
-import NotFound from './compontents/NoFund'
+import Main from './components/Main'
+import Login from './components/login/Login'
+import NotFound from './components/NoFund'
 import React from "react";
 import {useSelector} from "react-redux";
 
@@ -27,7 +27,7 @@ function App() {
 }
 
 function PrivateRoute({ children, ...rest }) {
-  const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
   console.log(user);
   
   return (

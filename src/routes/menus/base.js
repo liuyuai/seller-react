@@ -1,5 +1,5 @@
-import Home from '../../compontents/Home'
-import About from "../../compontents/About";
+import Home from '../../components/Home'
+import About from "../../components/About";
 
 export const base = [
   {path:"/home",title:'首页',component:Home,id:1},
