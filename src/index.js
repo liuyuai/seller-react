@@ -9,6 +9,8 @@ import {ConfigProvider } from 'antd'  //antd 全局化配置 可以定义配置�
 import {Provider} from "react-redux";
 import store from './store/index'
 
+//那岂不是要在这里加一个接口么
+
 
 // 由于使用了antdUI  导致StrictMode 模式会有错误
 ReactDOM.render(

@@ -15,19 +15,19 @@ service.interceptors.request.use(config => {
       config.url = config.url + "?" + paramsStr;
     }
     config.headers = {
-      "Content-Type": "application/json; charset=UTF-8",
-      platform: "seller"
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      platform: "mp"
     };
   } else if (config.method === "post") {
-    config.transformRequest = [
-      data => {
-        data = QS.stringify(data);
-        return data;
-      }
-    ];
+    // config.transformRequest = [
+    //   data => {
+    //     // data = QS.stringify(data);
+    //     return data;
+    //   }
+    // ];
     config.headers = {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      platform: "seller"
+      "Content-Type": "application/json; charset=UTF-8",
+      platform: "mp"
     };
   }
   return config;

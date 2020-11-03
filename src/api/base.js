@@ -2,12 +2,16 @@
 //这个方法 是为了让你去写 大量重复的代码
 
 import {service} from "../libs/http";
-service.defaults.baseURL ="//base.test.66buy.com.cn";
+import config from "../config/index"
+const {DOMAIN} = config;
+
+
+service.defaults.baseURL =`//base${DOMAIN}`;
 
 export const getUserInfo = function (data) {
-
+  return service.get('/mp/auth/info');
 };
 
 export const login = function (data) {
-  return service.post('/privates/auth/seller/extLogin',data);
+  return service.post('/mp/seller/login',data);
 };

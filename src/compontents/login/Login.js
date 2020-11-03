@@ -1,6 +1,6 @@
 import './Login.scss'
 import React from 'react'
-import {Form,Input,Button } from "antd";
+import {Form,Input,Button,message } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom'
 import { login } from '../../api/base'
@@ -11,15 +11,12 @@ import {useDispatch} from "react-redux";
 export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
-  
   const onFinish = (values) => {
     login(values).then(data=>{
-      if(data.success){
         dispatch(loginUSer(data));
         history.push("/home");
-      }else{
-        alert(data.username)
-      }
+    }).catch((error)=>{
+      message.error(error.message)
     })
   };
   
@@ -34,7 +31,7 @@ export default function Login() {
               onFinish={onFinish}
           >
             <Form.Item
-                name="username"
+                name="cellPhone"
                 rules={[{ required: true, message: 'Please input your Username!' }]}
             >
               <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />

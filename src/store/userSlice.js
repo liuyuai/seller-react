@@ -1,12 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import {getUserInfo} from '../api/base'
 
+export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
+  const response = await getUserInfo();
+  console.log(response);
+  return response;
+});
 
-// export const fetchUser =createAsyncThunk(
+//当前用户状态
+//  1.使用localStorage,sessionStorage  存储本地
+//  2.每次调用接口 获取用户状态
 
 
 
 const initialState = {
-  id:'222'
+  loggedIn:true
 };
 
 
@@ -14,8 +22,9 @@ const userSlice = createSlice({
   name:"user",
   initialState,
   reducers:{
-    loginUSer(state,action){
-      state.user = action.payload;
+    loginUSer:(state,action)=>{
+      console.log(action.payload);
+      state.loggedIn = true;
     }
   }
 });
