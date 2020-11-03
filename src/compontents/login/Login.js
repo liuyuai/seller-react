@@ -3,13 +3,24 @@ import React from 'react'
 import {Form,Input,Button } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom'
+import { login } from '../../api/base'
+import {loginUSer} from '../../store/userSlice'
+import {useDispatch} from "react-redux";
 
 
 export default function Login() {
-  let history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
   
   const onFinish = (values) => {
-    history.push("/home");
+    login(values).then(data=>{
+      if(data.success){
+        dispatch(loginUSer(data));
+        history.push("/home");
+      }else{
+        alert(data.username)
+      }
+    })
   };
   
   return (
