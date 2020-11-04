@@ -2,9 +2,9 @@ import React,{ useState, useEffect} from 'react'
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined, } from '@ant-design/icons';
 import Routes from '../routes/index'
-import User from '../compontents/header/User'
+import User from './/header/User'
 import {Row ,Col } from 'antd'
-import LeftMenu from '../compontents/leftMenu/LeftMenu'
+import LeftMenu from './/leftMenu/LeftMenu'
 import BreadcrumbCustom from './BreadcrumbCustom'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css';

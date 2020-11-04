@@ -37,13 +37,13 @@ function App() {
 
 function PrivateRoute({ children, ...rest }) {
   const user = useSelector(state => state.user);
-  
+  console.log(user);
   
   return (
     <Route
       {...rest}
       render={({ location }) =>
-          user.loggedIn ? (
+          user.success ? (
           children
         ) : (
           <Redirect
