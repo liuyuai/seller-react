@@ -1,9 +1,12 @@
 import axios from 'axios'
 import QS from 'querystring'
+import config from '../config/index'
+const {WITH_CREDENTIALS} = config.HTTP
 
 
 export const service = axios.create({
-  timeout:3000
+  timeout:3000,
+  withCredentials:WITH_CREDENTIALS
 });
 
 service.interceptors.request.use(config => {

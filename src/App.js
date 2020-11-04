@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import Main from './compontents/Main'
-import Login from './compontents/login/Login'
-import NotFound from './compontents/NoFund'
+import Main from './components/Main'
+import Login from './components/login/Login'
+import NotFound from './components/NoFund'
 import React,{useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {fetchUser} from './store/userSlice'
@@ -43,7 +43,7 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-          user.success ? (
+          user.loggedIn ? (
           children
         ) : (
           <Redirect
