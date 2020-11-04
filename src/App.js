@@ -1,11 +1,10 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Main from './components/Main'
 import Login from './components/login/Login'
 import NotFound from './components/NoFund'
-import React,{useEffect} from "react";
-import {useSelector,useDispatch} from "react-redux";
-import {fetchUser} from './store/userSlice'
+import React from "react";
+import {useSelector} from "react-redux";
 
 
 //使用严格匹配看看能不能解决 乱输入url是  还渲染main主题
@@ -16,10 +15,6 @@ import {fetchUser} from './store/userSlice'
 
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(fetchUser());
-  });
   return (
       <Router>
         <Switch>
@@ -37,7 +32,6 @@ function App() {
 
 function PrivateRoute({ children, ...rest }) {
   const user = useSelector(state => state.user);
-  console.log(user);
   
   return (
     <Route

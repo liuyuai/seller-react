@@ -1,9 +1,9 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import {getUserInfo} from '../api/base'
+import {setToken, setCookie} from "../libs/tools";
 
 export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
   const response = await getUserInfo();
-  console.log(response);
   return response;
 });
 
@@ -26,10 +26,23 @@ const userSlice = createSlice({
       console.log(action.payload);
       state.loggedIn = true;
     }
+  },
+  extraReducers:{
+    [fetchUser.fulfilled]:(state,action) =>{
+      console.log(action);
+    }
   }
 });
 
 export const {loginUSer} = userSlice.actions;
+
+export const setUserToken = (data) =>{
+  const {merchantId,token} = data;
+  setToken(token);
+  setCookie('merchantId', merchantId);
+}
+
+
 
 export default userSlice.reducer
 

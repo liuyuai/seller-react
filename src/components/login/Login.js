@@ -4,7 +4,7 @@ import {Form,Input,Button,message } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom'
 import { login } from '../../api/base'
-import {loginUSer} from '../../store/userSlice'
+import {loginUSer,setUserToken} from '../../store/userSlice'
 import {useDispatch} from "react-redux";
 
 
@@ -14,6 +14,7 @@ export default function Login() {
   const onFinish = (values) => {
     login(values).then(data=>{
         dispatch(loginUSer(data));
+        setUserToken(data);
         history.push("/home");
     }).catch((error)=>{
       message.error(error.message)

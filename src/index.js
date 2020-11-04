@@ -10,6 +10,7 @@ import {Provider} from "react-redux";
 import store from './store/index'
 
 //那岂不是要在这里加一个接口么
+console.log(store.getState().user.loggedIn);
 
 
 // 由于使用了antdUI  导致StrictMode 模式会有错误
