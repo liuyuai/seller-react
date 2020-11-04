@@ -2,6 +2,8 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import {getUserInfo} from '../api/base'
 import {setToken, setCookie} from "../libs/tools";
 
+
+
 export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
   const response = await getUserInfo();
   return response;
@@ -14,7 +16,8 @@ export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
 
 
 const initialState = {
-  loggedIn:true
+  loggedIn:false,
+  status:'idle'
 };
 
 
@@ -23,13 +26,16 @@ const userSlice = createSlice({
   initialState,
   reducers:{
     loginUSer:(state,action)=>{
-      console.log(action.payload);
       state.loggedIn = true;
     }
   },
   extraReducers:{
     [fetchUser.fulfilled]:(state,action) =>{
-      console.log(action);
+      state.status = 'succeeded';
+      state.loggedIn = true;
+    },
+    [fetchUser.rejected]:(state,action) =>{
+      state.loggedIn = false;
     }
   }
 });

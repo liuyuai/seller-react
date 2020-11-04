@@ -7,18 +7,21 @@ import {Row ,Col } from 'antd'
 import LeftMenu from './/leftMenu/LeftMenu'
 import BreadcrumbCustom from './BreadcrumbCustom'
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css';
+import {useDispatch} from "react-redux";
+import {fetchUser} from "../store/userSlice";
 
 const {Header , Sider ,Content} = Layout;
 
 
 export default function Main() {
+  const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(false);
   function toggle() {
     setCollapsed(!collapsed);
   }
   useEffect(() => {
     NProgress.done();
+    dispatch(fetchUser());
     return () => NProgress.start();
   });
   return (

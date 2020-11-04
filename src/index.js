@@ -8,9 +8,8 @@ import './index.css';
 import {ConfigProvider } from 'antd'  //antd 全局化配置 可以定义配置所有组件一些样式 具体看api
 import {Provider} from "react-redux";
 import store from './store/index'
+import 'nprogress/nprogress.css';
 
-//那岂不是要在这里加一个接口么
-console.log(store.getState().user.loggedIn);
 
 
 // 由于使用了antdUI  导致StrictMode 模式会有错误
