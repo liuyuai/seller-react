@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Switch,Route } from "react-router-dom";
 import menuList from "./menus";
-
+import {useDispatch, useSelector} from "react-redux";
+import NProgress from "nprogress";
+import {fetchUser} from "../store/userSlice";
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -19,6 +22,17 @@ function CreateRoute(route) {
 }
 
 function RouteWithSubRoutes(route) {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const history = useHistory();
+  useEffect(() => {
+    NProgress.done();
+    dispatch(fetchUser());
+    return () => NProgress.start();
+  });
+  if(user.status === 'failed'&& user.loggedIn === false){
+    history.push('/login');
+  }
   return (
     route.childrens?
       <Route>

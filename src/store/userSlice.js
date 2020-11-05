@@ -5,7 +5,7 @@ import {setToken, setCookie} from "../libs/tools";
 
 
 export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
-  const response = await getUserInfo();
+  const response = await getUserInfo().catch(error=>error);
   return response;
 });
 
@@ -33,9 +33,10 @@ const userSlice = createSlice({
     [fetchUser.fulfilled]:(state,action) =>{
       state.status = 'succeeded';
       state.loggedIn = true;
-    },
-    [fetchUser.rejected]:(state,action) =>{
-      state.loggedIn = false;
+      if(action.payload.code === 888){
+        state.status = 'failed';
+        state.loggedIn = false;
+      }
     }
   }
 });

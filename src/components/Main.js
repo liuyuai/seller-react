@@ -1,29 +1,20 @@
-import React,{ useState, useEffect} from 'react'
+import React,{ useState} from 'react'
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined, } from '@ant-design/icons';
-import Routes from '../routes/index'
 import User from './/header/User'
 import {Row ,Col } from 'antd'
 import LeftMenu from './/leftMenu/LeftMenu'
 import BreadcrumbCustom from './BreadcrumbCustom'
-import NProgress from 'nprogress'
-import {useDispatch} from "react-redux";
-import {fetchUser} from "../store/userSlice";
 
 const {Header , Sider ,Content} = Layout;
 
 
-export default function Main() {
-  const dispatch = useDispatch();
+export default function Main(prop) {
   const [collapsed, setCollapsed] = useState(false);
   function toggle() {
     setCollapsed(!collapsed);
   }
-  useEffect(() => {
-    NProgress.done();
-    dispatch(fetchUser());
-    return () => NProgress.start();
-  });
+
   return (
       <>
         <Layout id="components-layout">
@@ -47,7 +38,8 @@ export default function Main() {
             <Content className="site-layout-background"
                      style={{margin: '12px 16px', padding: 16, minHeight: 280}}>
               {/*所以routes 放在这里是没有错的 */}
-              <Routes></Routes>
+              {/*<Routes></Routes>*/}
+              {prop.children}
             </Content>
           </Layout>
           
