@@ -1,84 +1,60 @@
 import React,{useEffect,useState} from 'react'
 import {Table,Space} from "antd";
-import {getAllOrder} from "../../api/order";
+import {getVerifyList} from "../../api/order";
 
 
 export default function OrderList() {
   const [tableData,setTableData] = useState([]);
-  useEffect(()=>{
-    getAllOrder().then(data=>{
-      console.log(data);
+  
+  const fetchData = () =>{
+    getVerifyList().then(data=>{
       setTableData(data[0]);
     })
-  });
+  };
+  useEffect(()=>{
+    if(tableData.length === 0){
+      fetchData();
+    }
+  },[tableData]);
   
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
+      title: '订单编号',
+      dataIndex: 'fkOrderId',
+      key: 'fkOrderId'
     },
     {
-      title: 'describe',
-      dataIndex: 'describe',
-      key: 'describe',
-      render: text => {
-        return text&&text.a?text.a:''
-      },
+      title: '订单状态',
+      dataIndex: 'orderStateText',
+      key: 'orderStateText'
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: '用户电话',
+      dataIndex: 'memberPhone',
+      key: 'memberPhone',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: '专柜名称',
+      dataIndex: 'verifierSellerName',
+      key: 'verifierSellerName',
     },
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: (text, record) => (
           <Space size="middle">
-            <a>Invite {record.name}</a>
-            <a>Delete</a>
+            <a>干啥</a>
+            <a>都行</a>
           </Space>
       ),
     },
   ];
   
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      describe:{a:1},
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      describe:{a:1},
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ];
   
   
   return (
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={tableData} />
       </div>
   )
 }

@@ -15,7 +15,14 @@ export const getAllOrder = () =>{
       service.get('/mp/order/list'),
       service.get('/mp/order/count')
   ])
+};
 
+export const getVerifyList = () =>{
+  return Promise.all([
+    service.get('/mp/order/verify/list'),
+    service.get('/mp/order/verify/count')
+  ])
+  
 };
 
 
