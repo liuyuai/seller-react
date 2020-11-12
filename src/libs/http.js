@@ -1,5 +1,5 @@
 import axios from 'axios'
-import QS from 'querystring'
+import QS from 'qs'
 import config from '../config/index'
 const {WITH_CREDENTIALS} = config.HTTP;
 
@@ -7,16 +7,37 @@ const {WITH_CREDENTIALS} = config.HTTP;
 
 
 export default (param) =>{
+  
   const config = Object.assign({
     timeout:3000,
     withCredentials:WITH_CREDENTIALS
   },param);
+  
   const service = axios.create(config);
   service.interceptors.request.use(config => {
+    
+    if(config.data){
+      Object.keys(config.data).map((item) => {
+        if (!config.data[item]) {
+          delete config.data[item];
+        }
+        return true;
+      });
+    }
+    if(config.params){
+      Object.keys(config.params).map((item) => {
+        if (!config.params[item]) {
+          delete config.params[item];
+        }
+        return true;
+      });
+    }
+    
     if (config.method === "get") {
       let paramsStr = QS.stringify(config.params || config.data || {}, {
         indices: false
       });
+      
       if (paramsStr) {
         config.url = config.url + "?" + paramsStr;
       }

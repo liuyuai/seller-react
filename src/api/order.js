@@ -17,10 +17,13 @@ export const getAllOrder = () =>{
   ])
 };
 
-export const getVerifyList = () =>{
+export const getVerifyList = (data) =>{
+  const param  = {
+    data:data
+  };
   return Promise.all([
-    service.get('/mp/order/verify/list'),
-    service.get('/mp/order/verify/count')
+    service.get('/mp/order/verify/list',param),
+    service.get('/mp/order/verify/count',param)
   ])
   
 };
