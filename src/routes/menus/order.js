@@ -1,20 +1,14 @@
 import List from "../../views/order/OrederList";
 import Cancel from "../../views/order/Cancel";
 
-export const order=  [{
-  path:"/order",title:'订单',id:2,
-  childrens:[
-    { path:"/order/list",title:"全部订单",component:List,id:21},
-    { path:'/order/all',title:"全部交易",component:"All",id:'22'},
-    { path:"/order/cancel",title:"已取消",component:Cancel,id:23},
-    { path:'/cancel',title:"全部交易",id:'3',
-      childrens: [
-        {path: '/cancel/order',title:"取消订单",component: "Order",id:'31'},
-        {path: '/cancel/cancel',title:"取消",component: "Cancel",id:'32'},
-        {path: '/cancel/list',title:"取消列表",component: "List",id:'33'}
-      ]
-    }
-  ]
+export const order=  [
+  {
+    path:"/order",title:'订单',id:2,
+    childrens:[
+      { path:"/order/list",title:"全部订单",component:List,id:21},
+      { path:'/order/all',title:"全部交易",component:"All",id:'22'},
+      { path:"/order/cancel",title:"已取消",component:Cancel,id:23},
+    ]
   },
   { path:'/exchange',title:"兑换管理",id:'4',
   childrens: [

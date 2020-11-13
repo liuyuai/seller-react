@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {Table,Space,Form, Input, Button ,Row } from "antd";
 import {getVerifyList} from "../../api/order";
+import "./OrderList.scss"
 
 
 
@@ -47,7 +48,7 @@ const QueryForm = ({fn}) => {
             <Input />
           </Form.Item>
         </Row>
-        <Row style={{marginTop:10,marginBottom:10}}>
+        <Row className="margin10">
           <Form.Item
               label="核销人手机号"
               name="verifierPhone"
@@ -86,11 +87,7 @@ export default function OrderList() {
   // react 中 通过参数 第二个参数传[]  来实现 created的形式
   useEffect(()=>{
       fetchData({page:1,rows:10});
-    console.log('aaaa');
   },[]);
-  useEffect(()=>{
-    console.log('dddd');
-  });
   
   
   const columns = [

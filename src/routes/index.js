@@ -4,7 +4,7 @@ import menuList from "./menus";
 import {useDispatch, useSelector} from "react-redux";
 import NProgress from "nprogress";
 import {fetchUser} from "../store/userSlice";
-import { useHistory } from 'react-router-dom'
+import { useHistory,useLocation } from 'react-router-dom'
 
 
 
@@ -21,18 +21,24 @@ function CreateRoute(route) {
   )
 }
 
+
+//在可以来实现么
 function RouteWithSubRoutes(route) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const history = useHistory();
   useEffect(() => {
     NProgress.done();
-    dispatch(fetchUser());
+    // if(user.loggedIn){
+    //
+    // }else{
+      dispatch(fetchUser());
+      if(user.status === 'failed'&& user.loggedIn === false){
+        history.push('/login');
+      }
+    // }
     return () => NProgress.start();
   });
-  if(user.status === 'failed'&& user.loggedIn === false){
-    history.push('/login');
-  }
   return (
     route.childrens?
       <Route>

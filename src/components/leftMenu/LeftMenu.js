@@ -9,7 +9,8 @@ const { SubMenu } = Menu;
 function renderMenuItem(props) {
   return (
       <Menu.Item key={props.id}>
-        <NavLink exact to={props.path}>{props.title}</NavLink>
+        <NavLink exact to={props.path}
+        >{props.title}</NavLink>
       </Menu.Item>
   )
 }

@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Main from './components/Main'
 import Login from './components/login/Login'
 import NotFound from './components/NoFund'
-import React from "react";
+import React,{useEffect} from "react";
 import Routes from "./routes";
 
 
@@ -15,6 +15,9 @@ import Routes from "./routes";
 
 
 function App() {
+  useEffect(()=>{
+    console.log('aaaa');
+  });
   return (
       <Router>
         <Switch>
@@ -32,25 +35,5 @@ function App() {
   )
 }
 
-// function PrivateRoute({ children, ...rest }) {
-//   const user = useSelector(state => state.user);
-//   return (
-//     <Route
-//       {...rest}
-//       render={({ location }) =>
-//           user.loggedIn ? (
-//           children
-//         ) : (
-//           <Redirect
-//             to={{
-//               pathname: "/login",
-//               state: { from: location }
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-// }
 
 export default App;
