@@ -4,7 +4,6 @@ import {Form,Input,Button,message } from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom'
 import { login } from '../../api/base'
-import NProgress from "nprogress";
 import {loginUSer,setUserToken} from '../../store/userSlice'
 import {useDispatch} from "react-redux";
 
@@ -21,10 +20,6 @@ export default function Login() {
       message.error(error.message)
     })
   };
-  useEffect(()=>{
-    NProgress.done();
-    return () => NProgress.start();
-  })
   
   return (
       <div className='bg'>

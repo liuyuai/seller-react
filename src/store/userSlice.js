@@ -27,9 +27,15 @@ const userSlice = createSlice({
   reducers:{
     loginUSer:(state,action)=>{
       state.loggedIn = true;
+    },
+    loginOut:(state,action)=>{
+      state.loggedIn = false
     }
   },
   extraReducers:{
+    [fetchUser.pending]:(state,action) =>{
+      state.status = 'loading';
+    },
     [fetchUser.fulfilled]:(state,action) =>{
       state.status = 'succeeded';
       state.loggedIn = true;
@@ -41,7 +47,7 @@ const userSlice = createSlice({
   }
 });
 
-export const {loginUSer} = userSlice.actions;
+export const {loginUSer,loginOut} = userSlice.actions;
 
 export const setUserToken = (data) =>{
   const {merchantId,token} = data;

@@ -4,15 +4,17 @@ import {useHistory} from 'react-router-dom'
 import {Avatar,Menu,Dropdown } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 import {clearToken} from '../../libs/tools'
-
-
+import {useDispatch} from "react-redux";
+import {loginOut} from '../../store/userSlice'
 
 
 export default function User() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleClick = (e)=>{
     if(e.key === "layout"){
       clearToken();
+      dispatch(loginOut());
       history.push('/login');
     }
   };

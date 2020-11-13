@@ -1,4 +1,4 @@
-import React,{ useState} from 'react'
+import React,{ useState,useEffect} from 'react'
 import { Layout } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined, } from '@ant-design/icons';
 import User from './/header/User'
@@ -14,7 +14,7 @@ export default function Main(prop) {
   function toggle() {
     setCollapsed(!collapsed);
   }
-
+  
   return (
       <>
         <Layout id="components-layout">
