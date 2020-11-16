@@ -12,12 +12,15 @@ export const fetchUser = createAsyncThunk('user/fetchUser',async ()=>{
 //当前用户状态
 //  1.使用localStorage,sessionStorage  存储本地
 //  2.每次调用接口 获取用户状态
+//这里 我先不  normalization data
+// 跳白页  可以使用loading的方式 根据转台判断 加一个loading
 
-
+//
 
 const initialState = {
   loggedIn:false,
-  status:'idle'
+  status:'idle',
+  menuTree:[]
 };
 
 
@@ -30,6 +33,9 @@ const userSlice = createSlice({
     },
     loginOut:(state,action)=>{
       state.loggedIn = false
+    },
+    setUserMenu:(state,action)=>{
+      state.menuTree =action.payload.menuTree;
     }
   },
   extraReducers:{
@@ -47,7 +53,7 @@ const userSlice = createSlice({
   }
 });
 
-export const {loginUSer,loginOut} = userSlice.actions;
+export const {loginUSer,loginOut,setUserMenu} = userSlice.actions;
 
 export const setUserToken = (data) =>{
   const {merchantId,token} = data;

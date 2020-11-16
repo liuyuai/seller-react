@@ -3,18 +3,22 @@ import {Switch, Route, Redirect} from "react-router-dom";
 import menuList from "./menus";
 import {useDispatch, useSelector} from "react-redux";
 import NProgress from "nprogress";
-import {fetchUser} from "../store/userSlice";
+import {loginUSer,setUserMenu} from "../store/userSlice";
 import { useHistory,useLocation } from 'react-router-dom'
 import Login from "../components/login/Login";
-import NotFound from "../components/NoFund";
 import Main from "../components/Main";
 import {getUserInfo} from "../api/base";
 
 
 
-
-
 // 现在好用的原因 是因为每次切换页面后  返回的[]在本质上都一样  多以每次跳转都生成了 新的route  这应该是不对的
+
+//之前那种定义路由应该是对的  但是脑子有病去思考 在登录状态调用 info 接口 这里很蠢
+// 如果在login的情况下那么一定是 退出了
+
+
+
+
 function CreateRoute(route) {
   return (
     <Route
@@ -28,24 +32,7 @@ function CreateRoute(route) {
 }
 
 
-//在可以来实现么
 export function RouteWithSubRoutes(route) {
-  
-  // const dispatch = useDispatch();
-  // const user = useSelector(state => state.user);
-  // const history = useHistory();
-  // useEffect(() => {
-  //   if(user.loggedIn){
-  //
-  //   }else{
-  //     dispatch(fetchUser());
-  //     if(user.status === 'failed'&& user.loggedIn === false){
-  //       history.push('/login');
-  //     }
-  //   }
-  //
-  // });
-  
   return (
     route.childrens?
       <Route>
@@ -54,8 +41,6 @@ export function RouteWithSubRoutes(route) {
     :CreateRoute(route)
   )
 }
-
-
 function Routes() {
   return (
       <Switch>
@@ -64,20 +49,35 @@ function Routes() {
   )
 }
 
+function NotFound() {
+  return (
+      <div>
+        这里什么也没有啊
+      </div>
+  )
+}
+
+// Question: 当我使用/来表示主题后 在直接输入url的时候 不知道是否匹配了 也不知道则怎么修改
+// 1 就是路由加载的时候  和全部的path匹配 然后 看看有没有
+// 2、我看下match 有没有可能捕获
 
 export default function BeforeRoute() {
   const history = useHistory();
   const location = useLocation();
   const user = useSelector(state => state.user);
-  
+  const dispatch = useDispatch();
   useEffect(()=>{
     NProgress.done();
     
     if(user.loggedIn){
-    
+      if(location.pathname === '/'){
+       history.push('/home')
+      }
+      
     }else{
       getUserInfo().then(data=>{
-      
+        dispatch(setUserMenu(data));
+        dispatch(loginUSer());
       }).catch(error =>{
         if(location.pathname === "/login"){
         
@@ -95,10 +95,12 @@ export default function BeforeRoute() {
         <Redirect exact from="/" to="/home" />
         <Route path="/">
           <Main>
-            <Routes></Routes>
+            <Switch>
+              <Routes></Routes>
+            </Switch>
           </Main>
         </Route>
-        <Route component={NotFound} />
+        <Route component={NotFound}/>
       </>
   )
 }
