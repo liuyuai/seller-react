@@ -48,6 +48,38 @@
 *  qs 是 人为编写的 增强了安全性的 格式化 library
 *  querystring 是 node的核心模块 处理URL的查询字符串
 *
+*  os-seller的权限设置
+*
+*  第一步 遍历本地的所有菜单  通过filter 来遍历掉所有的没有path的button
+*   1. 第一的为 一级菜单
+*   2. level 是 二级 显示列表 菜单
+*
+*   这个事吧 其实是一种思考的 过程 自己去想怎么实现 权限设置
+*
+*   丰哥的思考
+*   本地的js文件 按照模块 把所有的router 定义 然后通过 authList中存储的权限来 indexOf  _include 的方式判断 是否有权限
+*                                                   用户的shop list的 只要有交集 就可以看见这个页面
+*
+*   按钮中 分为两种  通过添加 operation  来去确定是按钮
+*   1.跳转页面类型
+*    通过添加hideInMenu 来是否隐藏按钮   这里应该是想做3级下拉框   并且希望 这个3级子菜单和 button 是 level3  所以这里是有问题
+*   2.功能类型
+*    功能类  需要在具体的功能页面的 按钮上 添加标识位  来判断是是否显示
+*     showAlways：(default: false)只有一个子路由时，是否显示父路由
+*     notAuth：(default:false) 是否需要登录，默认都需要登录
+*     notCache：(default: false)是否启用keep-alive
+*
+*
+*
+*
+*
+*
+*
+* **/
+
+
+/*
+*  权限设置
 *
 *
 *
