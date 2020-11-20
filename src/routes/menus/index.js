@@ -6,7 +6,9 @@ import {order} from "./order";
 
 // 考虑当前=
 
-export default [
+const menuList = [
     ...base,
     ...order
 ];
+export default menuList
+

@@ -42,8 +42,35 @@ export function RouteWithSubRoutes(route) {
   )
 }
 function Routes() {
+  const history = useHistory();
+  const location = useLocation();
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    NProgress.done();
+    
+    if(user.loggedIn){
+      if(location.pathname === '/'){
+        history.push('/home')
+      }
+      
+    }else{
+      getUserInfo().then(data=>{
+        dispatch(setUserMenu(data));
+        dispatch(loginUSer());
+      }).catch(error =>{
+        if(location.pathname === "/login"){
+        
+        }else{
+          history.push('/login');
+        }
+      })
+    }
+    return () => NProgress.start();
+  });
   return (
       <Switch>
+        {/*这里的menuList 需要和数据库的做对比*/}
         {menuList.map(item =><RouteWithSubRoutes key={item.id} {...item} /> )}
       </Switch>
   )
@@ -62,34 +89,8 @@ function NotFound() {
 // 2、我看下match 有没有可能捕获
 
 export default function BeforeRoute() {
-  const history = useHistory();
-  const location = useLocation();
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    NProgress.done();
-    
-    if(user.loggedIn){
-      if(location.pathname === '/'){
-       history.push('/home')
-      }
-      
-    }else{
-      getUserInfo().then(data=>{
-        dispatch(setUserMenu(data));
-        dispatch(loginUSer());
-      }).catch(error =>{
-        if(location.pathname === "/login"){
-        
-        }else{
-          history.push('/login');
-        }
-      })
-    }
-    return () => NProgress.start();
-  });
   return(
-      <>
+      <Switch>
         <Route path="/login" component={Login} />
         <Route path="/404" component={NotFound} />
         <Redirect exact from="/" to="/home" />
@@ -101,6 +102,7 @@ export default function BeforeRoute() {
           </Main>
         </Route>
         <Route component={NotFound}/>
-      </>
+      </Switch>
+      
   )
 }

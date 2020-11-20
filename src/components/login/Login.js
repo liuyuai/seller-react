@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { login } from '../../api/base'
 import {loginUSer,setUserToken} from '../../store/userSlice'
 import {useDispatch} from "react-redux";
+import NProgress from "nprogress";
 
 
 export default function Login() {
@@ -20,7 +21,10 @@ export default function Login() {
       message.error(error.message)
     })
   };
-  
+  useEffect(()=>{
+    NProgress.done();
+    return () => NProgress.start();
+  });
   return (
       <div className='bg'>
         <div className="login-box">
@@ -48,7 +52,7 @@ export default function Login() {
               />
             </Form.Item>
             <Form.Item className="text-right">
-              <a className="login-form-forgot" href="">
+              <a className="login-form-forgot" href="/home">
                 忘记密码
               </a>
             </Form.Item>

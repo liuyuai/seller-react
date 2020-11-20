@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {Table,Space,Form, Input, Button ,Row } from "antd";
+import { useHistory } from 'react-router-dom'
 import {getVerifyList} from "../../api/order";
 import "./OrderList.scss"
 
@@ -77,6 +78,7 @@ const QueryForm = ({fn}) => {
 export default function OrderList() {
   const [tableData,setTableData] = useState([]);
   const [total,setTotal] = useState(0);
+  const history = useHistory();
   const fetchData = (values) =>{
     getVerifyList(values).then(data=>{
       setTableData(data[0]);
@@ -89,6 +91,10 @@ export default function OrderList() {
       fetchData({page:1,rows:10});
   },[]);
   
+  
+  const goDetail = ({id}) =>{
+    history.push(`/order/detail/${id}`)
+  };
   
   const columns = [
     {
@@ -114,12 +120,14 @@ export default function OrderList() {
     {
       title: '操作',
       key: 'action',
-      render: (text, record) => (
-          <Space size="middle">
-            <a>干啥</a>
-            <a>都行</a>
-          </Space>
-      ),
+      render: (text, record) => {
+        return (
+            <Space size="middle">
+              <a onClick={()=>goDetail(record)}>干啥</a>
+              <a onClick={()=>goDetail(record)}>都行</a>
+            </Space>
+            )
+      },
     },
   ];
   

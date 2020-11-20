@@ -6,7 +6,7 @@ const {WITH_CREDENTIALS} = config.HTTP;
 
 
 
-export default (param) =>{
+const createService = (param) =>{
   
   const config = Object.assign({
     timeout:3000,
@@ -84,7 +84,7 @@ export default (param) =>{
   return service;
 }
 
-
+export default createService
 
 
 

@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import React from "react";
 import BeforeRoute from "./routes";
 
@@ -16,9 +16,7 @@ import BeforeRoute from "./routes";
 function App() {
   return (
       <Router>
-        <Switch>
           <BeforeRoute />
-        </Switch>
       </Router>
   )
 }
