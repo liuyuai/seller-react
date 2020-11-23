@@ -19,25 +19,29 @@ import {getUserInfo} from "../api/base";
 
 
 
-
-export function createRoutes(route) {
-  const singleRoute = (route) =>{
-    return (
-        <Route
-            exact
-            key={route.id}
-            path={route.path}
-            render={props => (
-                <route.component {...props} routes={route.routes} />
-            )}
-        />
-    )
-  };
-  const subRoute = (route) =>{
-    return route.childrens && route.childrens.map((item) => (item.childrens?subRoute(item):singleRoute(item)));
-  };
+function CreateRoute(route) {
   return (
-    route.component? singleRoute(route):subRoute(route)
+    <Route
+      exact
+      path={route.path}
+      render={props => (
+        <route.component {...props} routes={route.routes} />
+      )}
+    />
+  )
+}
+
+
+
+
+// 之前这里就是由于这个Route 标签影响 多嵌套了一层
+export function RouteWithSubRoutes(route) {
+  return (
+    route.childrens?
+      <Route>
+        {route.childrens.map(item => <CreateRoute key={item.id} {...item}/>)}
+      </Route>
+    :CreateRoute(route)
   )
 }
 function Routes() {
@@ -70,17 +74,12 @@ function Routes() {
   return (
       <Switch>
         {/*这里的menuList 需要和数据库的做对比*/}
-        {menuList.map(item =>createRoutes(item))}
-        <Route render={()=><Redirect to="/404" />} />
+        {menuList.map(item =><RouteWithSubRoutes key={item.id} {...item} /> )}
       </Switch>
   )
 }
 
 function NotFound() {
-  useEffect(()=>{
-    NProgress.done();
-    return () => NProgress.start();
-  });
   return (
       <div>
         这里什么也没有啊
@@ -100,7 +99,9 @@ export default function BeforeRoute() {
         <Redirect exact from="/" to="/home" />
         <Route path="/">
           <Main>
+            <Switch>
               <Routes></Routes>
+            </Switch>
           </Main>
         </Route>
         <Route component={NotFound}/>
