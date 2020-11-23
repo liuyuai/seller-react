@@ -10,6 +10,15 @@ import {Provider} from "react-redux";
 import store from './store/index'
 import 'nprogress/nprogress.css';
 
+// this.component = () =>{
+//   return (
+//       <div>
+//         啦啦
+//       </div>
+//   )
+// };
+// <this.component />  可调用
+
 
 
 // 由于使用了antdUI  导致StrictMode 模式会有错误
