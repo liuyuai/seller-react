@@ -5,7 +5,7 @@
 *   1.协议内容 http0.9 http1.0 http1.1  http2 https
 *       三次握手 go-back-go  四次挥手 go back back go(wait)
 *       https  添加SSL/TLS   非对称加密   对称加密    第一次 获取浏览器公私密钥的 公钥 然后把本地的私钥(client)通过
-*       通过公钥加密 传给 服务器 然后 通过本地的私钥（client）来进行 传输
+*       通过公钥加密 传给 服务器 服务器使用私钥解密回去客户端私钥(client key) 然后 通过本地的私钥（client）来进行 传输
 *       http2的特性
 *       2.二进制格式传输
 *         多路复用
@@ -13,7 +13,7 @@
 *         头部压缩
 *
 *   2.缓存策略：
-*       强缓存   expires Cache-Control: max-age:'321313131'
+*       强缓存   expires Cache-Control: max-age=321313131
 *       协商缓存   etag  if-none-match  last-modified  if-modified-since
 *       缓存的目的是为了 让页面加载更快，显示的更快，让用户有更好的体验   直接访问
 *        浏览器缓存 本地缓存
@@ -32,6 +32,10 @@
 *   6.dns解析  (域名解析)  电话本
 *
 *   7.SEO
+*
+*
+*
+*   路由的产生
 *
 *
 *   本地项目级别
